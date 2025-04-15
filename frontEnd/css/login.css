@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: radial-gradient(circle at top right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login-container {
+    background: white;
+    border: 1px solid #dbdbdb;
+    padding: 40px;
+    width: 350px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .logo {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 48px;
+    margin-bottom: 30px;
+    color: #262626;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  button {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background-color: #007fd1;
+  }
+
+  .divider {
+    margin: 20px 0;
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    color: #8e8e8e;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    height: 1px;
+    width: 40%;
+    background: #dbdbdb;
+    position: absolute;
+    top: 50%;
+  }
+
+  .divider::before {
+    left: 0;
+  }
+
+  .divider::after {
+    right: 0;
+  }
+
+  .forgot-link {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #00376b;
+    text-decoration: none;
+  }
+
+  .forgot-link:hover {
+    text-decoration: underline;
+  }
+
+
+
+  .bottom-text {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .bottom-text a {
+    color: #3897f0;
+    text-decoration: none;
+    font-weight: bold;
+  }

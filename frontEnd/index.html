@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram Clone</title>
+
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/index.css">
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Instagram</div>
+    <div class="profile-menu" onclick="toggleDropdown()">
+      <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png" id="profile_pic" alt="Profile" />
+      <span>▼</span>
+      <div class="dropdown" id="dropdownMenu">
+        <button>👤 Profile</button>
+        <button onClick=signout() >🚪 Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post Section -->
+  <h2 id="username">gdsgf</h2>
+  <br><br><br>
+  <a href="post_add.html">Add Posts</a>
+   <div class="posts" id="posts">
+   
+       <!-- <div class="post-section">
+           <div class="post-header">
+               <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png" alt="User" />
+               <strong>john_doe</strong>
+            </div>
+            <img class="post-image" src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D" alt="Post Image" />
+            <div class="post-description">
+                Sunday vibes 🧘‍♂️☀️ #RelaxMode #InstaClone
+            </div>
+        </div> -->
+        
+    </div>
+
+  
+
+  <a href="login.html">login</a>
+
+  <a href="signup.html">signup</a>
+
+  
+
+
+  <script src="js/index.js"></script>
+
+  <script>function toggleDropdown() {
+    const dropdown = document.getElementById("dropdownMenu");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  document.addEventListener("click", function (e) {
+    const menu = document.querySelector(".profile-menu");
+    if (!menu.contains(e.target)) {
+      document.getElementById("dropdownMenu").style.display = "none";
+    }
+  });</script>
+
+</body>
+</html>
