@@ -18,6 +18,8 @@ export default async function auth(req, res, next) {
 
     req.user = auth.id;
 
+    
+
     next();
 
   } catch (err) {

@@ -24,6 +24,7 @@ async function signUp(e){
 
     //confirm password
     let c_password = document.getElementById('cpassword').value
+    
     //check password matching
     if(password!=c_password){
         alert("Paswords do not match")
@@ -49,6 +50,7 @@ async function signUp(e){
 
         if(response.status===201){
             alert(data.message)
+            window.location.href = "/"
         }
 
         else{

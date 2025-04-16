@@ -19,6 +19,8 @@
   <div class="navbar">
     <div class="logo">Instagram</div>
     <div class="profile-menu" onclick="toggleDropdown()">
+      <div class="user-greet">
+        <span id="username">Welcome, User</span></div>
       <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png" id="profile_pic" alt="Profile" />
       <span>▼</span>
       <div class="dropdown" id="dropdownMenu">
@@ -29,9 +31,9 @@
   </div>
 
   <!-- Post Section -->
-  <h2 id="username">gdsgf</h2>
+  <h2 id="username" class="username"></h2>
   <br><br><br>
-  <a href="post_add.html">Add Posts</a>
+  <a href="post_add.html" class="post-btn">+</a>
    <div class="posts" id="posts">
    
        <!-- <div class="post-section">

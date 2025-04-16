@@ -1,7 +1,7 @@
 
 import express from "express"
 
-import { signUp,logIn } from "../controller/user_controller.js"
+import { signUp,logIn , getUser } from "../controller/user_controller.js"
 
 import { addPost,loadPosts } from "../controller/post_controller.js"
 
@@ -19,35 +19,9 @@ insta_routes.post("/logIn",logIn)
 
 insta_routes.post("/addPost",addPost)
 
-
 insta_routes.get("/loadPosts",auth,loadPosts)
 
+insta_routes.get("/getUser/:id",getUser)
+
+
 export default insta_routes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

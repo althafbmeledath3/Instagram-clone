@@ -135,9 +135,8 @@ display: inline-block;
 .story-ring img {
 display: block;
 border-radius: 50%;
-border: 2px solid white; /* white gap like Instagram */
+border: 2px solid white; 
 }
-
 
   .post-image {
     width: 100%;
@@ -149,6 +148,80 @@ border: 2px solid white; /* white gap like Instagram */
     font-size: 15px;
     color: #444;
   }
+
+/* upload icon */
+  .upload-icon {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-color: #3897f0;
+    color: white;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .upload-icon:hover {
+    background-color: #2d7fd3;
+  }
+  
+  .upload-icon span {
+    line-height: 1;
+    position: relative;
+    top: -2px;
+  }
+  
+
+  .post-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: transform 0.2s ease;
+  }
+  
+
+
+  .user-greet {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+    color: #555;
+    position: relative;
+    right: 45px;
+  }
+  
+  .user-greet #username {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .user-greet .arrow {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 2px;
+  }
+  
+
+
 
   /* Responsive */
   @media (max-width: 640px) {

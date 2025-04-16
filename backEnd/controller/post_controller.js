@@ -8,15 +8,15 @@ export const addPost = async function addPost(req,res){
 
     try{
 
-       const {post,description} = req.body
+       const {username,post,description,profile_pic} = req.body
 
-       if(!post || !description ){
+       if(!username ||!post || !description || !profile_pic ){
 
         return res.status(404).json({message:"Please fill all the fileds"})
        }
 
        
-       const data = postSchema.create({post,description})
+       const data = postSchema.create({username,post,description,profile_pic})
 
        res.status(201).json({message:"Post Uploaded Successfully"})
        
@@ -32,14 +32,15 @@ export const addPost = async function addPost(req,res){
 
 
 
-
-
-
 export const loadPosts = async function loadPosts(req,res){
 
     console.log("Inside Load posts")
 
+    console.log(req.user)
+
     const userData = await userSchema.findOne({_id:req.user})
+
+   console.log(userData)
 
 
     try{
@@ -51,8 +52,5 @@ export const loadPosts = async function loadPosts(req,res){
 
         res.status(500).send({error:err})
     }
-
-    
-
-    
 }
+

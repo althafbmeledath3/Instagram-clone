@@ -1,4 +1,4 @@
-
+// console.log(localStorage.getItem('token'))
 
 let posts = document.getElementById('posts')
 let str=""
@@ -19,21 +19,26 @@ async function loadPosts(){
 
         const data = await response.json()
         console.log(data)
+
         if(response.status===200){
 
-            
+            //set the id on localstorage
+            localStorage.setItem('id',data.userData._id)
+            // localStorage.setItem('profile',data.userData.profile_pic)
+
             //posts
             data.data.forEach(element => {
-                
+
                 str+= `
-                
+    
                 <div class="post-section">
                 <div class="post-header">
-                <img src=${data.userData.profile_pic} alt="User" />
-                <strong>${data.userData.email.split("@")[0]}</strong>
+                <img src=${element.profile_pic} alt="User" />
+                <strong>${element.username}</strong>
                 </div>
                 <img class="post-image" src=${element.post} alt="Post Image" />
                 <div class="post-description">
+                
                 ${element.description}
                 </div>
                 </div>`
@@ -44,20 +49,18 @@ async function loadPosts(){
 
             posts.innerHTML = str
 
-            username.textContent = `welcome ${data.userData.email.split("@")[0]}`
+            username.textContent = `Welcome ${data.userData.username}`
         }
 
         else if(response.status===403){
 
            window.location.href = "/login.html"
-        //    window.location.reload()
+
+        //window.location.reload()
 
         }
 
-        
-
     }
-
 
     catch(err){
 
@@ -78,7 +81,10 @@ loadPosts()
 function signout(){
 
     alert("Signing Out")
-    localStorage.removeItem("token");
+
+    localStorage.removeItem("id");
+    localStorage.removeItem("token")
+
     window.location.href = "/login.html"
 
 }

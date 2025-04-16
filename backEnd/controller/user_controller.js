@@ -62,7 +62,9 @@ export const logIn = async function logIn(req, res) {
       const token = await jwt.sign({ id: userExist._id }, process.env.JWT_KEY, {
         expiresIn: "24h",
       });
-  
+
+      
+
       res.status(200).json({ message: "Logged in success" ,token});
   
     } catch (err) {
@@ -71,5 +73,37 @@ export const logIn = async function logIn(req, res) {
     }
   };
   
+
+
+//get one user
+
+export const getUser = async function getUser(req,res) {
+
+  try{
+
+    
+    const id = req.params.id
+
+    const data = await userSchema.findById(id)
+
+    if(!data){
+      return res.status(404).json({message:"Not Found"})
+    }
+
+    res.status(200).json(data)
+    
+  }
+
+
+
+  catch(err){
+
+    console.log(err)
+    res.status(500).json({messgae:err})
+  }
+
+
+}
+
 
 

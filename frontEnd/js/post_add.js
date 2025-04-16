@@ -15,7 +15,28 @@ async function addPost(e){
 
     const description = document.getElementById('description').value
 
-    let data = {post,description}
+
+    let id = localStorage.getItem('id') || "";
+
+    if(!id){
+        return 
+    }
+
+    console.log("idis",id)
+
+    const response1 = await fetch(`/api/getUser/${id}`)
+
+    const user_data = await response1.json()
+
+    console.log("userdat",user_data)
+
+
+    let username = user_data.username
+    let profile_pic = user_data.profile_pic
+
+
+
+    let data = {username,post,description,profile_pic}
 
 
     let options = {
@@ -25,7 +46,6 @@ async function addPost(e){
     }
 
     try{
-
 
         const response = await fetch('/api/addPost',options)
 
