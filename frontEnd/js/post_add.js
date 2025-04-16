@@ -33,10 +33,13 @@ async function addPost(e){
 
     let username = user_data.username
     let profile_pic = user_data.profile_pic
+    
+    //take user id and pass to post database
+    let userid = user_data._id
 
 
 
-    let data = {username,post,description,profile_pic}
+    let data = {username,post,description,profile_pic,userid}
 
 
     let options = {
