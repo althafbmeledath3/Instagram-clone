@@ -11,13 +11,15 @@
 
   <div class="login-container">
     <div class="logo">Instagram</div>
-    <form onsubmit="logIn(event)">
-      <input type="text" name="email" placeholder="Enter your email" id="email" required>
-      <input type="password" name="password" placeholder="Password"  id="password"   required>
-      <button type="submit">Log In</button>
+    
+    <form onsubmit="pass_reset(event)">
+      <input type="password" name="password" placeholder="Enter your new password" id="password" required>
+
+      <input type="password" name="cpassword" placeholder="Confirm Password"  id="cpassword"   required>
+      <button type="submit">Change Password</button>
     </form>
 
-    <a href="forgot.html" class="forgot-link">Forgot password?</a>
+    <!-- <a href="forgot.html" class="forgot-link">Forgot password?</a> -->
     <br>
     <div class="bottom-text">
         New to Instagram? <a href="/signup.html">SignUp</a>
@@ -25,6 +27,6 @@
     
   </div>
 
-  <script src="js/login.js"></script>
+  <script src="js/pass_reset.js"></script>
 </body>
 </html>

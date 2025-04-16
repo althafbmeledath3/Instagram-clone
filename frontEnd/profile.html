@@ -12,51 +12,34 @@
   <div class="container">
     <!-- Profile Header -->
     <div class="profile-header">
-      <img class="profile-pic" src="https://i.pravatar.cc/150?img=32" alt="Profile Picture" />
+      <img id="profile_pic" class="profile-pic" alt="Profile Picture" />
+      
       <div class="profile-info">
         <div class="top-row">
-          <h2 class="username" id="username">johndoe</h2>
-          <button class="edit-btn">Edit Profile</button>
+          <h2 class="username" id="username">john_doe</h2>
+          <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
+          <button class="edit-btn" onclick="deleteProfile()">Delete Profile</button>
+          <button class="logout-btn" onclick="signout()">Logout</button>
         </div>
+
         <div class="stats">
-          <span><strong id="num_posts">120</strong> posts</span>
+          <span><strong id="num_posts">42</strong> posts</span>
           <span><strong>2,345</strong> followers</span>
           <span><strong>340</strong> following</span>
         </div>
+
         <div class="bio">
-          <strong>John Doe</strong><br>
+          <strong id="under_name">John Doe</strong><br>
           Travel ✈️ | Foodie 🍕 | Developer 💻<br>
-          www.johndoe.dev
         </div>
       </div>
     </div>
 
     <hr />
 
-    <!-- Highlights -->
-    <div class="highlights">
-      <div class="highlight">
-        <img src="https://i.pravatar.cc/100?img=21" />
-        <p>Trips</p>
-      </div>
-      <div class="highlight">
-        <img src="https://i.pravatar.cc/100?img=12" />
-        <p>Food</p>
-      </div>
-      <div class="highlight">
-        <img src="https://i.pravatar.cc/100?img=25" />
-        <p>Dev</p>
-      </div>
-    </div>
-
     <!-- Posts Grid -->
-    <div class="posts-grid">
-      <img src="https://picsum.photos/300/300?random=1" />
-      <img src="https://picsum.photos/300/300?random=2" />
-      <img src="https://picsum.photos/300/300?random=3" />
-      <img src="https://picsum.photos/300/300?random=4" />
-      <img src="https://picsum.photos/300/300?random=5" />
-      <img src="https://picsum.photos/300/300?random=6" />
+    <div class="posts-grid" id="posts">
+      <!-- Post images will be loaded here -->
     </div>
   </div>
 

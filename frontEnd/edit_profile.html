@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Your Profile</title>
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Grand+Hotel&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+  <div class="signup-container">
+    <div class="logo">Instagram</div>
+    <form onsubmit="signUp(event)">
+
+        <label for="profile_pic" class="profile-label">Upload Profile Picture</label>
+        <div class="preview" id="preview"></div>
+    <input type="file" name="profile_pic" id="profile_pic"  />
+
+      <input type="text" name="username" placeholder="Username" id="username" required />
+      <input type="email" name="email" placeholder="Email" id="email" required />
+      <input type="tel" name="phone" placeholder="Phone Number" id="phone" required />
+      <!-- <input type="password" name="password" id="password" placeholder="Password" required />
+      <input type="password" name="confirmPassword" id="cpassword" placeholder="Confirm Password" required /> -->
+      <button type="submit">Register</button>
+    </form>
+    <div class="bottom-text">
+      Already have an account? <a href="/login.html">Log in</a>
+    </div>
+  </div>
+
+  <script src="js/edit_profile.js"></script>
+</body>
+</html>

@@ -1,9 +1,9 @@
 
 import express from "express"
 
-import { signUp,logIn , getUser } from "../controller/user_controller.js"
+import { signUp,logIn , getUser ,editUser} from "../controller/user_controller.js"
 
-import { addPost,loadPosts,getPost } from "../controller/post_controller.js"
+import { addPost,loadPosts,getPost ,deleteProfile} from "../controller/post_controller.js"
 
 import auth from "../middlewares/auth.js"
 
@@ -26,6 +26,12 @@ insta_routes.get("/getUser/:id",getUser)
 
 //get one user uploaded posts data
 insta_routes.get("/getPost/:id",getPost)
+
+//edit user details
+insta_routes.post("/editUser/:id",editUser)
+
+//delete user
+insta_routes.get('/deleteProfile/:id',deleteProfile)
 
 
 export default insta_routes

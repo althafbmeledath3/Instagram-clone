@@ -16,19 +16,22 @@
 <body>
 
   <!-- Navbar -->
-  <div class="navbar">
-    <div class="logo">Instagram</div>
-    <div class="profile-menu" onclick="toggleDropdown()">
-      <div class="user-greet">
-        <span id="username">Welcome, User</span></div>
+<div class="navbar">
+  <div class="logo">Instagram</div>
+  <div class="profile-wrapper" onclick="toggleDropdown()">
+    <div class="profile-info">
+      <span class="welcome-text"> <strong id="username">User</strong></span>
       <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_640.png" id="profile_pic" alt="Profile" />
-      <span>▼</span>
-      <div class="dropdown" id="dropdownMenu">
-        <a href="profile.html"><button>👤 Profile</button></a>
-        <button onClick=signout() >🚪 Logout</button>
-      </div>
+      <span class="arrow-down">▼</span>
     </div>
+    <div class="dropdown" id="dropdownMenu">
+      <a href="profile.html" class="dropdown-item">👤 Profile</a>
+      <button onClick="signout()" class="dropdown-item">🚪 Logout</button>
+    </div>
+    
+    
   </div>
+</div>
 
   <!-- Post Section -->
   <h2 id="username" class="username"></h2>

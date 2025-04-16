@@ -81,10 +81,36 @@ export const getPost = async function getPost(req,res){
         res.status(500).json({message:err})
     }
    
-
-
-    
 }
+
+
+export const deleteProfile = async function deleteProfile(req, res) {
+
+    try {
+
+      const id = req.params.id;
+  
+      // Delete all posts of user
+      const post_delete = await postSchema.deleteMany({ userid: id });
+  
+      // delete the user
+      const user_delete = await userSchema.findByIdAndDelete(id);
+  
+      if (!user_delete) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+
+      res.status(200).json({message:"User Deleted Successfully"})
+
+
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: err.message || "Internal server error" });
+    }
+  };
+  
 
 
 

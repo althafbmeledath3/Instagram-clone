@@ -107,3 +107,33 @@ export const getUser = async function getUser(req,res) {
 
 
 
+export const editUser = async function editUser(req, res) {
+  try {
+
+    //get id
+    const id = req.params.id;
+
+    const { profile_pic, username, email, phone } = req.body;
+
+    const data = await userSchema.findByIdAndUpdate(
+      id,
+      { profile_pic, username, email, phone },
+      { new: true } 
+    );
+
+    if (!data) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({message:"Data Updated Successfully"});
+
+  } 
+  
+  catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message || "Internal server error" }); 
+  }
+};
+
+
+
