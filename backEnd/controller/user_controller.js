@@ -3,6 +3,19 @@ import userSchema from "../models/user.model.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
+import nodemailer from "nodemailer"
+
+const transporter = nodemailer.createTransport({
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
+  secure: false, // true for port 465, false for other ports
+  auth: {
+    user: "c02c2fd894074a",
+    pass: "e21d18254c39d7",
+  },
+});
+
+
 
 export const signUp = async function signUp(req,res){
 
@@ -137,3 +150,164 @@ export const editUser = async function editUser(req, res) {
 
 
 
+
+
+export async function sendOTP(req,res){
+
+  try{
+
+    
+    const {email} = req.body
+    
+    
+    const user = await userSchema.findOne({email})
+    
+    if(!user){
+      
+      return res.status(404).json({message:"Email not Found"})
+    }
+    
+    
+    let otp = Math.floor(Math.random()*900000)+100000
+    
+    
+    user.otp = otp
+
+    console.log(user.otp)
+
+    await user.save();
+    
+    const info = await transporter.sendMail({
+      from: 'althafbmeledath3@gmail.com', // sender address
+      to: email, // list of receivers
+      subject: "OTP Verification", // Subject line
+      text: 'OTP', // plain text body
+      html: `<b>Hello ${user.username} your otp is ${otp}</b>`, // html body
+    });
+    
+    console.log("Message sent: %s", info.messageId);
+    
+    res.status(200).json({message:"OTP send successfully"})
+    
+  }
+
+  catch(err){
+
+    console.log(err)
+    res.status(500).json({message:err})
+  }
+
+}
+
+
+
+export async function verify_otp(req,res){
+
+  try{
+
+    
+    const {email,otp} = req.body
+    
+    
+    const user = await userSchema.findOne({email})
+    
+    if(!user){
+      
+      return res.status(404).json({message:"Email not Found"})
+    }
+    
+
+    if(user.otp===otp){
+
+      res.status(200).json({message:"OTP verified Successfully"})
+    }
+   
+    
+  }
+
+  catch(err){
+
+    console.log(err)
+    res.status(500).json({message:err})
+  }
+
+}
+
+
+
+
+
+export async function pass_reset(req,res){
+
+  try{
+
+    
+    const {email,password} = req.body
+    
+    
+    const user = await userSchema.findOne({email})
+    
+    if(!user){
+      
+      return res.status(404).json({message:"Email not Found"})
+    }
+
+
+    bcrypt.hash(password,10).then(async (hashed_pwd)=>{
+            
+      user.password = hashed_pwd
+      await user.save()
+
+
+      res.status(200).json({message:"Password reset Successfully"})
+  })
+    
+
+  
+   
+    
+  }
+
+  catch(err){
+
+    console.log(err)
+    res.status(500).json({message:err})
+  }
+
+}
+
+
+
+
+export async function delete_otp(req,res){
+
+  try{
+
+    
+    const {email} = req.body
+    
+    
+    const user = await userSchema.findOne({email})
+    
+    if(!user){
+      
+      return res.status(404).json({message:"Email not Found"})
+    }
+    
+
+   user.otp = null
+
+   await user.save()
+
+   res.status(200).json({message:"OTP Deleted Successfully from database"})
+   
+    
+  }
+
+  catch(err){
+
+    console.log(err)
+    res.status(500).json({message:err})
+  }
+
+}
