@@ -10,6 +10,9 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- Swiper.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+
   <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -36,9 +39,10 @@
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">×</span>
       <h2>Create a New Post</h2>
-      <input type="file" id="post" accept="image/*" required />
+      <input type="file" id="post" accept="image/*" multiple required />
       <textarea id="description" placeholder="Write a caption..." required></textarea>
-      <div class="preview" id="preview"></div>
+      
+      <div class="preview" id="preview" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
       <button onclick="addPost()">Share Post</button>
     </div>
   </div>
@@ -48,39 +52,36 @@
   <br><br><br>
   <div class="posts" id="posts"></div>
 
-  <!-- <a href="login.html">login</a>
-  <a href="signup.html">signup</a> -->
-
   <script>
     function toggleDropdown(event) {
-      event.stopPropagation()
-      const dropdown = document.getElementById("dropdownMenu")
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block"
+      event.stopPropagation();
+      const dropdown = document.getElementById("dropdownMenu");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
     }
 
     document.addEventListener("click", function (e) {
-      const dropdown = document.getElementById("dropdownMenu")
+      const dropdown = document.getElementById("dropdownMenu");
       if (!e.target.closest('.profile-pic-container img')) {
-        dropdown.style.display = "none"
+        dropdown.style.display = "none";
       }
-    })
+    });
 
-    const modal = document.getElementById('uploadModal')
+    const modal = document.getElementById('uploadModal');
 
     function openModal() {
-      modal.style.display = 'flex'
+      modal.style.display = 'flex';
     }
 
     function closeModal() {
-      modal.style.display = 'none'
-      document.getElementById('postImage').value = ''
-      document.getElementById('postDescription').value = ''
+      modal.style.display = 'none';
+      document.getElementById('post').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('preview').innerHTML = '';
     }
-
-
-   
   </script>
 
+  <!-- Swiper.js JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="js/index.js"></script>
 </body>
 </html>

@@ -80,7 +80,7 @@ body {
 }
 
 .profile-pic-container:hover {
-  background-color: rgb(255, 238, 238)
+  background-color: rgb(255, 238, 238);
 }
 
 .profile-pic-container img {
@@ -144,7 +144,7 @@ body {
 .post-btn {
   width: 60px;
   height: 60px;
-  background: var(--insta-gradient);
+  background: var(--inSta-gradient);
   color: white;
   font-size: 32px;
   font-weight: bold;
@@ -260,7 +260,7 @@ body {
   font-size: 16px;
 }
 
-/* Updated story ring effect */
+/* Story ring effect */
 .story-ring {
   padding: 2px;
   border-radius: 50%;
@@ -276,16 +276,61 @@ body {
   display: inline-block;
 }
 
-/* Inner profile image inside ring */
 .story-ring img {
   display: block;
   border-radius: 50%;
   border: 2px solid white; 
 }
 
+.post-images {
+  position: relative;
+}
+
 .post-image {
   width: 100%;
+  height: 400px; /* Fixed height for consistency */
   object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Swiper Slider */
+.swiper {
+  width: 100%;
+  height: 400px; /* Match post-image height */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #fff;
+  background: var(--insta-gradient);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --swiper-navigation-size: 20px;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 20px;
+}
+
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--insta-gradient);
+  opacity: 1;
 }
 
 .post-description {
@@ -341,6 +386,28 @@ body {
   cursor: pointer;
 }
 
+/* Preview Images */
+.preview img {
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.preview.one img {
+  width: 550px;
+  height: auto;
+}
+
+.preview.two img {
+  width: 275px;
+  height: auto;
+}
+
+.preview.three-or-more img {
+  width: calc(33.33% - 6.66px);
+  height: auto;
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .post-section {
@@ -380,5 +447,13 @@ body {
   .dropdown-item {
     font-size: 14px;
     padding: 10px 18px;
+  }
+
+  .swiper {
+    height: 300px;
+  }
+
+  .post-image {
+    height: 300px;
   }
 }
