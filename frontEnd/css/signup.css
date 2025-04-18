@@ -6,7 +6,10 @@
 
   body {
     font-family: 'Roboto', sans-serif;
-    background: radial-gradient(circle at top right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    /* background: radial-gradient(circle at top right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); */
+
+    background: linear-gradient(to right top, #fffaf0, #fbeaff, #f0f3ff);
+    /* background: rgb(174, 160, 160); */
     display: flex;
     justify-content: center;
     align-items: center;
