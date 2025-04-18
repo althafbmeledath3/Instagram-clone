@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Your Profile</title>
   <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+  <!-- [New] Swiper.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="css/profile.css" />
 </head>
 <body>
@@ -43,12 +45,20 @@
     </div>
   </div>
 
+  <!-- [Updated] Modal with Swiper container -->
   <div class="image-modal" id="imageModal">
     <div class="image-modal-content">
-      <img id="enlargedImage" src="" alt="Enlarged Post" />
+      <div class="swiper profile-swiper">
+        <div class="swiper-wrapper"></div>
+        <div class="swiper-button-prev" aria-label="Previous slide"></div>
+        <div class="swiper-button-next" aria-label="Next slide"></div>
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
   </div>
 
+  <!-- [New] Swiper.js JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="js/profile.js"></script>
 </body>
 </html>

@@ -145,8 +145,8 @@ body {
   width: 60px;
   height: 60px;
   background: var(--inSta-gradient);
-  color: white;
-  font-size: 32px;
+  color:#d62976;
+  font-size: 52px;
   font-weight: bold;
   border-radius: 50%;
   text-align: center;

@@ -1,3 +1,4 @@
+
 let username = document.getElementById('username')
 let num_posts = document.getElementById('num_posts')
 
@@ -31,13 +32,32 @@ async function loadProfile(){
 
         const data2 = await response2.json()
 
+       
+        console.log('Profile posts:', data2);
+
         //reverse the data2 array to show latest posts first
         let reverse_data2 = data2.reverse()
 
-        reverse_data2.forEach(element => {
-            str+=`
-             <img src=${element.post} class="post-image" />
-            `
+       
+        const postData = [];
+
+        reverse_data2.forEach((element, index) => {
+
+           
+            let images = [];
+            if (element.post) {
+                images = element.post;
+            } 
+
+           
+
+            //show first image in the array
+            str += `
+                <img src="${images[0]}" class="post-image" data-post-index="${index}" />
+            `;
+
+            // store in array to show in modal
+            postData.push({ images });
         });
         
         posts.innerHTML = str
@@ -45,15 +65,40 @@ async function loadProfile(){
         //number of posts using posts total length
         num_posts.textContent = data2.length
 
-        document.querySelectorAll('.post-image').forEach(img => {
+        // [Updated] Handle modal click with Swiper slider
+        document.querySelectorAll('.post-image').forEach((img, i) => {
             img.addEventListener('click', () => {
-                const modal = document.getElementById('imageModal')
-                const enlargedImage = document.getElementById('enlargedImage')
-                enlargedImage.src = img.src
-                modal.style.display = 'flex'
-                document.body.classList.add('modal-open')
-            })
-        })
+                const modal = document.getElementById('imageModal');
+                const swiperWrapper = document.querySelector('.profile-swiper .swiper-wrapper');
+                
+                // [New] Get images for this post
+                const postImages = postData[img.dataset.postIndex].images;
+
+                // [New] Create swiper slides
+                swiperWrapper.innerHTML = postImages.map(imgSrc => `
+                    <div class="swiper-slide">
+                        <img src="${imgSrc}" alt="Post Image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;" />
+                    </div>
+                `).join('');
+
+                modal.style.display = 'flex';
+                document.body.classList.add('modal-open');
+
+                // [New] Initialize Swiper
+                new Swiper('.profile-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                    navigation: {
+                        nextEl: '.profile-swiper .swiper-button-next',
+                        prevEl: '.profile-swiper .swiper-button-prev'
+                    },
+                    pagination: {
+                        el: '.profile-swiper .swiper-pagination',
+                        clickable: true
+                    }
+                });
+            });
+        });
     }
     catch(err){
         console.log(err)
@@ -103,19 +148,12 @@ function signout(){
     window.location.href = "/"
 }
 
-
-
 document.addEventListener('click', function (e) {
     const modal = document.getElementById('imageModal')
     if (e.target === modal) {
         modal.style.display = 'none'
-        document.getElementById('enlargedImage').src = ''
+        
+        document.querySelector('.profile-swiper .swiper-wrapper').innerHTML = '';
         document.body.classList.remove('modal-open')
     }
 })
-
-
-
-
-
-
