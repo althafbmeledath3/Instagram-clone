@@ -32,6 +32,13 @@ async function forgot(e){
 
             localStorage.setItem('email',email)
 
+            //remove email form localstorage after 1 minute
+            setTimeout(()=>{
+
+                localStorage.removeItem("email")
+            },60000)
+
+
             window.location.href="/otp.html"
         }
 

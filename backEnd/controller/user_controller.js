@@ -221,7 +221,11 @@ export async function verify_otp(req,res){
 
       res.status(200).json({message:"OTP verified Successfully"})
     }
-   
+
+    else{
+
+      return res.status(401).json({message:"Incorrecr OTP Entered"})
+    }
     
   }
 

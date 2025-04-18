@@ -1,4 +1,3 @@
-
 let username = document.getElementById('username')
 let num_posts = document.getElementById('num_posts')
 
@@ -14,14 +13,7 @@ let str = ""
 let id = localStorage.getItem('id')
 
 async function loadProfile(){
-
-
     try{
-
-        
-        
-        
-        
         //fetch data using id
         const response1 = await fetch(`/api/getUser/${id}`)
         
@@ -43,11 +35,8 @@ async function loadProfile(){
         let reverse_data2 = data2.reverse()
 
         reverse_data2.forEach(element => {
-            
             str+=`
-            
-             <img src=${element.post} />
-            
+             <img src=${element.post} class="post-image" />
             `
         });
         
@@ -56,69 +45,55 @@ async function loadProfile(){
         //number of posts using posts total length
         num_posts.textContent = data2.length
 
-
-
+        document.querySelectorAll('.post-image').forEach(img => {
+            img.addEventListener('click', () => {
+                const modal = document.getElementById('imageModal')
+                const enlargedImage = document.getElementById('enlargedImage')
+                enlargedImage.src = img.src
+                modal.style.display = 'flex'
+                document.body.classList.add('modal-open')
+            })
+        })
     }
-
     catch(err){
-
         console.log(err)
-
     }
-
 }
-
 
 loadProfile()
 
-
 //function edit profile
-
 function editProfile(){
-
     window.location.href="edit_profile.html"
 }
 
-
 //function to delete profile
 async function deleteProfile(){
-
     try{
-
         const confirmDelete = confirm("Are you sure you want to Delete your Profile?");
-
         if (!confirmDelete){
-            
             return
         }
-
         
         const response = await fetch(`/api/deleteProfile/${id}`)
         
         const data = response.json()
         
         if(response.status===200){
-            
             alert("Profile Deleted Successfully")
             
             //clear localstorage token and id
             localStorage.clear()
             
             //now redirect to home page it will go in login page
-            
             window.location.href = "/"
         }
     }
-
     catch(err){
-
         console.log(err)
         alert(data.message)
-        
     }
-
 }
-
 
 function signout(){
 
@@ -126,25 +101,18 @@ function signout(){
     localStorage.clear()
     alert("Logging out")
     window.location.href = "/"
-
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.addEventListener('click', function (e) {
+    const modal = document.getElementById('imageModal')
+    if (e.target === modal) {
+        modal.style.display = 'none'
+        document.getElementById('enlargedImage').src = ''
+        document.body.classList.remove('modal-open')
+    }
+})
 
 
 

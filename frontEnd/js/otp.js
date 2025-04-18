@@ -47,7 +47,7 @@ async function verify_otp(e) {
 
         console.log(err)
 
-        alert(data.message)
+        alert(err)
     }
     
 }
