@@ -18,18 +18,45 @@ async function signUp(e){
 
     let email = document.getElementById('email').value
 
-    let phone = document.getElementById('phone').value
+    let phone = document.getElementById('phone').value.trim();
+
 
     let password = document.getElementById('password').value
 
     //confirm password
     let c_password = document.getElementById('cpassword').value
+
+   // Email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+
+    //phone number check
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+    }
+    
+
+    //password regular expression
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+        alert("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.");
+        return;
+    }
     
     //check password matching
     if(password!=c_password){
         alert("Paswords do not match")
         return
     }
+
+
     
 
     let data = {profile_pic,username,email,phone,password}

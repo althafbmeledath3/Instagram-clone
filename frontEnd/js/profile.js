@@ -65,16 +65,16 @@ async function loadProfile(){
         //number of posts using posts total length
         num_posts.textContent = data2.length
 
-        // [Updated] Handle modal click with Swiper slider
+       
         document.querySelectorAll('.post-image').forEach((img, i) => {
             img.addEventListener('click', () => {
                 const modal = document.getElementById('imageModal');
                 const swiperWrapper = document.querySelector('.profile-swiper .swiper-wrapper');
                 
-                // [New] Get images for this post
+               
                 const postImages = postData[img.dataset.postIndex].images;
 
-                // [New] Create swiper slides
+               
                 swiperWrapper.innerHTML = postImages.map(imgSrc => `
                     <div class="swiper-slide">
                         <img src="${imgSrc}" alt="Post Image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;" />

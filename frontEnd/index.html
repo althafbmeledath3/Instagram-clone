@@ -41,15 +41,13 @@
       <h2>Create a New Post</h2>
       <input type="file" id="post" accept="image/*" multiple required />
       <textarea id="description" placeholder="Write a caption..." required></textarea>
-      
-      <div class="preview" id="preview" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+      <div class="preview" id="preview"></div>
       <button onclick="addPost()">Share Post</button>
     </div>
   </div>
 
   <!-- Post Section -->
   <h2 id="username" class="username"></h2>
-  <br><br><br>
   <div class="posts" id="posts"></div>
 
   <script>

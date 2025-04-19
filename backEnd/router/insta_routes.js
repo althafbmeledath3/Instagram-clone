@@ -41,4 +41,7 @@ insta_routes.post('/pass_reset',pass_reset)
 
 insta_routes.post('/delete_otp',delete_otp)
 
+
+insta_routes.get("/getaUsers",)
+
 export default insta_routes

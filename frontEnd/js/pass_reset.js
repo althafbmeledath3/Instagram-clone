@@ -9,6 +9,16 @@ async function pass_reset(e){
 
     let c_password = document.getElementById('cpassword').value
 
+
+
+    //password regular expression
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+        alert("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.");
+        return;
+    }
+
     if(password!=c_password){
 
         alert("passwords do not match")

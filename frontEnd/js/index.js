@@ -1,6 +1,8 @@
 
 // console.log(localStorage.getItem('token'))
 
+import { fetch } from "undici-types";
+
 let posts = document.getElementById('posts');
 let str = "";
 
@@ -15,7 +17,7 @@ async function loadPosts() {
     });
 
    
-    console.log('Response status:', response.status);
+   
     const data = await response.json();
     console.log('Fetched data:', data);
 
@@ -27,22 +29,27 @@ async function loadPosts() {
       str = '';
 
       // generate posts
-      data.data.forEach((element, index) => {
+      const reversed = data.data.reverse()
+
+      reversed.forEach((element, index) => {
        
         let images = [];
 
         if (element.post) {
           images = element.post;
           
-        } 
+        }
 
+
+        console.log(element.post)
       
 
         let imagesHtml = '';
        
 
         // slider calass for image lenght greater than 1
-        if (images.length > 1) {
+
+        if (images.length >= 1) {
           imagesHtml = `
             <div class="swiper post-swiper-${index}">
               <div class="swiper-wrapper">
@@ -87,6 +94,14 @@ async function loadPosts() {
       profile_pic.src = data.userData.profile_pic;
       posts.innerHTML = str;
       username.textContent = `Welcome ${data.userData.username}`;
+
+
+      //display story ring
+      const response2 = await fetch("/api/getUsers")
+
+      const data2 = await response2.json()
+
+      console.log(data2)
 
       // handle heart icon toggles
       
@@ -203,13 +218,14 @@ async function addPost() {
 
   let username = user_data.username;
   let profile_pic = user_data.profile_pic;
+
   //take user id and pass to post database
   let userid = user_data._id;
 
   // post array
   let data = { username, post: postImages, description, profile_pic, userid };
 
-  console.log(data);
+  console.log("data",data);
   let options = {
     headers: { "Content-Type": "application/json" },
     method: "POST",
