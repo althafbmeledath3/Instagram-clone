@@ -119,6 +119,38 @@ export const getUser = async function getUser(req,res) {
 }
 
 
+//get all users
+
+
+export const getUsers = async function getUsers(req,res) {
+
+  try{
+
+    
+    // const id = req.params.id
+
+    const data = await userSchema.find()
+
+    if(!data){
+      return res.status(404).json({message:"Not Found"})
+    }
+
+    res.status(200).json(data)
+    
+  }
+
+
+
+  catch(err){
+
+    console.log(err)
+    res.status(500).json({messgae:err})
+  }
+
+
+}
+
+
 
 export const editUser = async function editUser(req, res) {
   try {

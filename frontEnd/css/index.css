@@ -19,6 +19,14 @@ body {
   min-height: 100vh;
 }
 
+
+.story-contain{
+
+  display: flex;
+}
+
+
+
 /* Navbar */
 .navbar {
   background: #fff;

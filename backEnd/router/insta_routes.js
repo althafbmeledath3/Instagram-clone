@@ -1,7 +1,7 @@
 
 import express from "express"
 
-import { signUp,logIn , getUser ,editUser,sendOTP,verify_otp,pass_reset,delete_otp} from "../controller/user_controller.js"
+import { signUp,logIn , getUser ,editUser,sendOTP,verify_otp,pass_reset,delete_otp,getUsers} from "../controller/user_controller.js"
 
 import { addPost,loadPosts,getPost ,deleteProfile} from "../controller/post_controller.js"
 
@@ -42,6 +42,6 @@ insta_routes.post('/pass_reset',pass_reset)
 insta_routes.post('/delete_otp',delete_otp)
 
 
-insta_routes.get("/getaUsers",)
+insta_routes.get("/getUsers",getUsers)
 
 export default insta_routes

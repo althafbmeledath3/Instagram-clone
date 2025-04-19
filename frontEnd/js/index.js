@@ -1,7 +1,7 @@
 
 // console.log(localStorage.getItem('token'))
 
-import { fetch } from "undici-types";
+// import { fetch } from "undici-types";
 
 let posts = document.getElementById('posts');
 let str = "";
@@ -19,7 +19,7 @@ async function loadPosts() {
    
    
     const data = await response.json();
-    console.log('Fetched data:', data);
+    // console.log('Fetched data:', data);
 
     if (response.status === 200) {
       // set the id on localstorage
@@ -41,7 +41,7 @@ async function loadPosts() {
         }
 
 
-        console.log(element.post)
+        // console.log(element.post)
       
 
         let imagesHtml = '';
@@ -101,8 +101,30 @@ async function loadPosts() {
 
       const data2 = await response2.json()
 
-      console.log(data2)
+      console.log("all usrs",data2)
 
+
+      let user_container = document.getElementById('story-contain')
+
+      let str1=''
+
+      data2.forEach((element)=>{
+
+        str1+=`
+        
+        
+        <div class="user-story-container">
+        <div class="story-ring">
+          <img class="story-pic" src=${element.profile_pic} alt="Dummy User Profile" />
+          
+        </div>
+        <span class="story-username">${element.username}</span>
+      </div>
+        `
+
+      })
+
+      user_container.innerHTML = str1
       // handle heart icon toggles
       
       document.addEventListener('click', (e) => {

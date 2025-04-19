@@ -14,11 +14,53 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
 
   <link rel="stylesheet" href="css/index.css">
+  <style>
+    /* Styles for story ring and user info next to logo */
+    .user-story-container {
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+    }
+
+    .story-ring {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+      padding: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .story-pic {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+      background-color: #fff;
+    }
+
+    .story-username {
+      margin-left: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #262626;
+    }
+  </style>
 </head>
 <body>
   <!-- Navbar -->
   <div class="navbar">
     <div class="logo">Instagram</div>
+
+    <div class="story-contain" id="story-contain">
+
+      
+     
+    </div>
+
     <div class="navbar-right">
       <div class="post-btn" onclick="openModal()">+</div>
       <div class="profile-wrapper">
