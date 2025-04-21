@@ -58,6 +58,39 @@ async function signUp(e){
 
     let phone = document.getElementById('phone').value
 
+
+
+    if(!profile_pic){
+
+        alert("Please Upload Your Profile")
+
+        return
+    }
+
+    if(!username){
+
+        alert("Enter your username")
+
+        return
+    }
+
+
+
+    // Email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+
+    //phone number check
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+        alert("Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9.");
+        return;
+    }
+
    
     let data = {profile_pic,username,email,phone}
 

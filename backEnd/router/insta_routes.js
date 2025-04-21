@@ -3,7 +3,7 @@ import express from "express"
 
 import { signUp,logIn , getUser ,editUser,sendOTP,verify_otp,pass_reset,delete_otp,getUsers} from "../controller/user_controller.js"
 
-import { addPost,loadPosts,getPost ,deleteProfile} from "../controller/post_controller.js"
+import { addPost,loadPosts,getPost ,deleteProfile,likePost} from "../controller/post_controller.js"
 
 import auth from "../middlewares/auth.js"
 
@@ -43,5 +43,9 @@ insta_routes.post('/delete_otp',delete_otp)
 
 
 insta_routes.get("/getUsers",getUsers)
+
+insta_routes.post('/likePost',likePost)
+
+
 
 export default insta_routes

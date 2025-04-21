@@ -9,7 +9,15 @@ async function logIn(e){
     let email = document.getElementById('email').value
     let password = document.getElementById('password').value
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
 
+
+    
+    
     let data = {email,password}
 
     let options = {

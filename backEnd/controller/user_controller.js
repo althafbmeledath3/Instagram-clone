@@ -347,3 +347,22 @@ export async function delete_otp(req,res){
   }
 
 }
+
+
+
+
+
+
+
+
+function addnum(a,b){
+
+
+  console.log(a+b)
+
+
+}
+
+
+
+addnum(3,4)

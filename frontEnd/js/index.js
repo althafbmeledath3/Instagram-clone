@@ -6,9 +6,16 @@
 let posts = document.getElementById('posts');
 let str = "";
 
+//delclare user id
+let userId = null;
+
+
+
 //username
 let username = document.getElementById('username');
 let profile_pic = document.getElementById('profile_pic');
+
+
 
 async function loadPosts() {
   try {
@@ -25,6 +32,8 @@ async function loadPosts() {
       // set the id on localstorage
       localStorage.setItem('id', data.userData._id);
 
+      userId = data.userData._id
+
     
       str = '';
 
@@ -32,6 +41,8 @@ async function loadPosts() {
       const reversed = data.data.reverse()
 
       reversed.forEach((element, index) => {
+
+    
        
         let images = [];
 
@@ -39,6 +50,8 @@ async function loadPosts() {
           images = element.post;
           
         }
+
+        
 
 
         // console.log(element.post)
@@ -61,29 +74,36 @@ async function loadPosts() {
             </div>`;
         } 
 
+        const isLiked = element.likes.includes(userId);
+        const heartFill = isLiked ? 'red' : 'none';
+        const heartClass = isLiked ? 'heart-icon loveIcon beat' : 'heart-icon loveIcon';
+
+        
         str += `
         <div class="post-section">
           <div class="post-header">
             <img src="${element.profile_pic}" alt="User" />
             <strong>${element.username}</strong>
           </div>
-          <div class="post-images ">${imagesHtml}</div>
+          <div class="post-images">${imagesHtml}</div>
           
           <!-- ❤️ SVG Heart Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                width="33" height="33"
-               class="heart-icon loveIcon"
+               class="${heartClass}"
                stroke="red"
                stroke-width="2"
-               fill="none"
+               fill="${heartFill}"
                stroke-linecap="round"
-               stroke-linejoin="round">
+               stroke-linejoin="round"
+               data-postid="${element._id}">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 
             7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
 
           <a class="comment-btn">💬</a>
           <a class="share-btn">⤴</a>
+          <p class="like-heart">${element.likes.length}M</p>
           <div class="post-description">
             ${element.description}
           </div>
@@ -123,7 +143,7 @@ async function loadPosts() {
         `
 
       })
-
+      //story display
       user_container.innerHTML = str1
       // handle heart icon toggles
       
@@ -131,6 +151,7 @@ async function loadPosts() {
         if (e.target.closest('.loveIcon')) {
           const icon = e.target.closest('.loveIcon');
           const isFilled = icon.getAttribute('fill') === 'red';
+          const postId = icon.getAttribute('data-postid');
           if (isFilled) {
             icon.setAttribute('fill', 'none');
             icon.classList.remove('beat');
@@ -138,15 +159,17 @@ async function loadPosts() {
             icon.setAttribute('fill', 'red');
             icon.classList.add('beat');
           }
+
+          likePost(postId)
         }
       });
 
       
       // add swiper for all iposts with class post-swiper
       const swiperElements = document.querySelectorAll('[class*="post-swiper-"]');
-      console.log(`Found ${swiperElements.length} Swiper containers`);
+      // console.log(`Found ${swiperElements.length} Swiper containers`);
       swiperElements.forEach((swiperEl, i) => {
-        console.log(`Initializing Swiper for post-swiper-${i}`);
+        // console.log(`Initializing Swiper for post-swiper-${i}`);
         new Swiper(`.post-swiper-${i}`, {
           slidesPerView: 1,
           spaceBetween: 10,
@@ -231,6 +254,14 @@ async function addPost() {
     return;
   }
 
+
+  if(!description){
+
+    alert("Please Give some Description")
+
+    return
+  }
+
   console.log("idis", id);
 
   const response1 = await fetch(`/api/getUser/${id}`);
@@ -270,6 +301,50 @@ async function addPost() {
     alert("An error occurred while posting.");
   }
 }
+
+
+
+
+async function likePost(postId){
+
+
+  try{
+
+
+    
+    
+    let data = {postId,userId}
+    
+    let options = {
+      headers:{"Content-Type":"application/json"},
+      method:"POST",
+      body:JSON.stringify(data)}
+      
+      
+      const response = await fetch('/api/likePost',options)
+      
+      const data1 = await response.json()
+
+      alert(data1.message)
+
+
+      
+    }
+
+    catch(err){
+
+      console.log(err)
+
+      alert(data1.message)
+    }
+
+
+   
+
+
+
+}
+
 
 //convert image to base64
 function convertBase64(file) {

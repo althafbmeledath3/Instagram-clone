@@ -28,7 +28,6 @@ app.use("/api",insta_routes)
 
 
 
-
 //connect database then start the server
 connection().then(()=>{
     app.listen(port,()=>{

@@ -114,4 +114,41 @@ export const deleteProfile = async function deleteProfile(req, res) {
 
 
 
+  export async function likePost(req, res) {
+
+    const { postId, userId } = req.body;
+  
+    try {
+      const post = await postSchema.findById(postId);
+
+
+      console.log(post.likes)
+  
+      if (!post) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+  
+      // if already liked remove it else like the post
+      const alreadyLiked = post.likes.includes(userId);
+  
+      if (alreadyLiked) {
+        post.likes = post.likes.filter(id => id !== userId);
+      } else {
+        post.likes.push(userId);
+      }
+  
+      await post.save();
+  
+      return res.status(200).json({
+        message: alreadyLiked ? "Post unliked" : "Post liked",
+        likesCount: post.likes.length
+      });
+  
+    } catch (error) {
+      console.error("Error liking post:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+  
+
 

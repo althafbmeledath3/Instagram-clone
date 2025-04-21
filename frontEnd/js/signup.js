@@ -9,6 +9,7 @@ document.getElementById('profile_pic').addEventListener('change',async(e)=>{
 })
 
 
+let password;
 
 async function signUp(e){
 
@@ -26,6 +27,20 @@ async function signUp(e){
     //confirm password
     let c_password = document.getElementById('cpassword').value
 
+
+    if(!profile_pic){
+
+        alert("Please Upload the Photo")
+
+        return
+    }
+
+    if(!username){
+
+        alert("Please Enter the Username")
+    }
+
+
    // Email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -35,11 +50,12 @@ async function signUp(e){
 
 
     //phone number check
-    const phoneRegex = /^\d{10}$/;
+       const phoneRegex = /^[6-9]\d{9}$/;
     if (!phoneRegex.test(phone)) {
-        alert("Please enter a valid 10-digit phone number.");
+        alert("Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9.");
         return;
     }
+    
     
 
     //password regular expression
@@ -47,6 +63,7 @@ async function signUp(e){
 
     if (!passwordRegex.test(password)) {
         alert("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.");
+
         return;
     }
     
@@ -89,8 +106,6 @@ async function signUp(e){
         console.log(err)
         alert(data.message)
     }
-
-
 
 }
 

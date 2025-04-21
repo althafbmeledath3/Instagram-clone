@@ -465,3 +465,26 @@ body {
     height: 300px;
   }
 }
+
+
+
+.like-heart {
+  display: block; 
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 5px 0 8px 15px;
+  line-height: 1.2;
+  transition: color 0.2s ease;
+}
+
+.like-heart::before {
+  content: '❤️'; 
+  margin-right: 6px;
+  vertical-align: middle;
+  font-size: 16px; 
+}
+
+.like-heart:hover {
+  color: #d62976; 
+}
