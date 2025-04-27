@@ -18,7 +18,7 @@ let profile_pic = document.getElementById('profile_pic');
 
 async function loadPosts() {
   try {
-    const response = await fetch("https://instagram-clone-3-kmgi.onrender.com/api/loadPosts", {
+    const response = await fetch("https://instagram-clone-3-gp0a.onrender.com//api/loadPosts", {
       headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
     });
 
