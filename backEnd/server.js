@@ -1,66 +1,34 @@
-import express from 'express'
-import url from 'url'
-import path, { dirname,join } from "path"
-import connection from './connection.js'
-
-import insta_routes from "./router/insta_routes.js"
-
-import env from "dotenv"
-
-env.config()
-
+import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import connection from './connection.js';
+import insta_routes from './router/insta_routes.js';
 
-const file_name = url.fileURLToPath(import.meta.url)
+dotenv.config();
 
-const __dirname = dirname(file_name)
+const app = express();
+const port = process.env.PORT || 4000;
 
-const frontEnd = join(__dirname,"..","frontEnd")
-
-
-const port = 4000 || process.env.port
-
-const app = express()
-
-
-// CORS configuration
 app.use(cors({
-    origin: 'https://instagram-clone-3-gp0a.onrender.com/',  // Replace with your actual frontend URL
-    methods: 'GET,POST,PUT,DELETE',  // Allowed methods
-    allowedHeaders: 'Content-Type,Authorization',  // Allowed headers
-  }));
+  origin: ['http://localhost:4000', 'https://instagram-clone-frontend-456.onrender.com'], // Update with your actual frontend URL
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+}));
 
+app.use(express.json({ limit: '50mb' }));
 
-app.use(express.json({limit:"50mb"}))
+// API routes
+app.use('/api', insta_routes);
 
-app.use(express.static(frontEnd))
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'Backend is running' });
+});
 
-
-app.use("/images",express.static(path.join(__dirname,"images")))
-
-
-app.use("/api",insta_routes)
-
-
-
-// Serve frontend static files (production only)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(frontEnd));
-
-  // For any non-API request, serve the frontend's index.html
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(frontEnd, 'index.html'));
+connection().then(() => {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
   });
-}
-
-
-
-
-//connect database then start the server
-connection().then(()=>{
-    app.listen(port,()=>{
-        console.log("Server Running on http://localhost:4000")
-    })
-})
-
-
+}).catch(err => {
+  console.error('Failed to connect to database:', err);
+});
