@@ -9,6 +9,13 @@ import env from "dotenv"
 
 env.config()
 
+import cors from 'cors';
+// CORS configuration
+app.use(cors({
+    origin: 'https://instagram-clone-3-gp0a.onrender.com/',  // Replace with your actual frontend URL
+    methods: 'GET,POST,PUT,DELETE',  // Allowed methods
+    allowedHeaders: 'Content-Type,Authorization',  // Allowed headers
+  }));
 
 const file_name = url.fileURLToPath(import.meta.url)
 
