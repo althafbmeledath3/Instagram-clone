@@ -10,7 +10,6 @@ let str = "";
 let userId = null;
 
 
-
 //username
 let username = document.getElementById('username');
 let profile_pic = document.getElementById('profile_pic');
@@ -237,56 +236,66 @@ document.getElementById('post').addEventListener('change', async (e) => {
     img.src = base64;
     preview.appendChild(img);
   }
+
+  
+  
+
 });
 
 async function addPost() {
-
   const description = document.getElementById('description').value;
   let id = localStorage.getItem('id') || "";
 
   if (!id) {
+    alert("User ID not found. Please log in.");
     return;
   }
 
-  // if no image then show aleret
   if (postImages.length === 0) {
     alert("Please select at least one image.");
     return;
   }
 
-
-  if(!description){
-
-    alert("Please Give some Description")
-
-    return
+  if (!description) {
+    alert("Please provide a description.");
+    return;
   }
 
-  console.log("idis", id);
-
-  const response1 = await fetch(`/api/getUser/${id}`);
-  const user_data = await response1.json();
-
-  console.log("userdat", user_data);
-
-  let username = user_data.username;
-  let profile_pic = user_data.profile_pic;
-
-  //take user id and pass to post database
-  let userid = user_data._id;
-
-  // post array
-  let data = { username, post: postImages, description, profile_pic, userid };
-
-  console.log("data",data);
-  let options = {
-    headers: { "Content-Type": "application/json" },
-    method: "POST",
-    body: JSON.stringify(data)
-  };
-
   try {
-    const response = await fetch('/api/addPost', options);
+    // Fetch user data
+    const response1 = await fetch(`/api/getUser/${id}`);
+    const user_data = await response1.json();
+
+    if (!response1.ok) {
+      alert("Failed to fetch user data.");
+      return;
+    }
+
+    let username = user_data.username;
+    let profile_pic = user_data.profile_pic;
+    let userid = user_data._id;
+
+    // Create FormData object
+    let formData = new FormData();
+
+    // let img_count = document.getElementById('post').files
+    
+    for (let i = 0; i < postImages.length; i++) {
+      formData.append("file", document.getElementById('post').files[i]);
+    }
+
+    // Append other fields
+    formData.append("username", username);
+    formData.append("description", description);
+    formData.append("profile_pic", profile_pic);
+    formData.append("userid", userid);
+
+    // Send request
+    const response = await fetch('/api/addPost', {
+      method: "POST",
+      body: formData 
+    });
+
     const data = await response.json();
 
     if (response.status === 201) {
@@ -296,8 +305,7 @@ async function addPost() {
       alert(data.message);
     }
   } catch (err) {
-    console.log(err);
-    // error
+    console.error("Error in addPost:", err);
     alert("An error occurred while posting.");
   }
 }
@@ -364,3 +372,24 @@ function convertBase64(file) {
     };
   });
 }
+
+
+// async function addPost() {
+//   const files = document.getElementById('post').files;
+//   const formData = new FormData();
+
+//   // Loop through all files and append them one by one
+//   for (let i = 0; i < files.length; i++) {
+//     formData.append("file", files[i]);  
+//   }
+
+//   console.log(formData)
+
+//   const response = await fetch('/api/mupload', {
+//     method: "POST",
+//     body: formData
+//   });
+
+//   const result = await response.json();
+//   console.log(result);
+// }

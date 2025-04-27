@@ -74,19 +74,30 @@ async function signUp(e){
     }
 
 
+    let formData = new FormData();
+
+    formData.append("file",document.getElementById('profile_pic').files[0])
+
+    formData.append("username",username)
+    formData.append("email",email)
+    formData.append("phone",phone)
+    formData.append("password",password)
     
 
-    let data = {profile_pic,username,email,phone,password}
+    // let data = {profile_pic,username,email,phone,password}
 
-    let options = {
-        headers:{"Content-Type":"application/json"},
-        method:"POST",
-        body:JSON.stringify(data)
-    }
+    // let options = {
+    //     headers:{"Content-Type":"application/json"},
+    //     method:"POST",
+    //     body:JSON.stringify(data)
+    // }
 
     try{
 
-        const response = await fetch('/api/signUp',options)
+        const response = await fetch('/api/signUp',{
+            method:"POST",
+            body:formData
+        })
         
         const data = await response.json()
 
@@ -106,6 +117,8 @@ async function signUp(e){
         console.log(err)
         alert(data.message)
     }
+
+
 
 }
 

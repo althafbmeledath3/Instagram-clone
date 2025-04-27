@@ -19,10 +19,14 @@ const transporter = nodemailer.createTransport({
 
 export const signUp = async function signUp(req,res){
 
+  
+  
 
     try{
 
-        const { profile_pic,username, email, phone, password } = req.body;
+        const profile_pic = req.file.path
+
+        const {username, email, phone, password } = req.body;
         
         
         if (!( profile_pic && username && email && phone && password)) {
@@ -31,7 +35,6 @@ export const signUp = async function signUp(req,res){
         }
         
         //hash the password
-        
         bcrypt.hash(password,10).then(async (hashed_pwd)=>{
             
             const data = await userSchema.create({

@@ -3,21 +3,21 @@ import express from "express"
 
 import { signUp,logIn , getUser ,editUser,sendOTP,verify_otp,pass_reset,delete_otp,getUsers} from "../controller/user_controller.js"
 
-import { addPost,loadPosts,getPost ,deleteProfile,likePost} from "../controller/post_controller.js"
+import { addPost,loadPosts,getPost ,deleteProfile,likePost,handleUpload} from "../controller/post_controller.js"
 
 import auth from "../middlewares/auth.js"
 
-
+import upload from "../multer/multer.config.js"
 
 const insta_routes = express.Router()
 
 
 
-insta_routes.post("/signUp",signUp)
+insta_routes.post("/signUp",upload.single('file'),signUp)
 
 insta_routes.post("/logIn",logIn)
 
-insta_routes.post("/addPost",addPost)
+insta_routes.post("/addPost",upload.array("file",10),addPost)
 
 insta_routes.get("/loadPosts",auth,loadPosts)
 
@@ -46,6 +46,8 @@ insta_routes.get("/getUsers",getUsers)
 
 insta_routes.post('/likePost',likePost)
 
+
+// insta_routes.post("/mupload",upload.array("file",10),handleUpload)
 
 
 export default insta_routes

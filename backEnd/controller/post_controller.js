@@ -5,17 +5,29 @@ import userSchema from "../models/user.model.js"
 
 export const addPost = async function addPost(req,res){
 
+ 
 
     try{
 
-       const {username,post,description,profile_pic,userid} = req.body
+       const files = req.files
 
-       if(!username ||!post || !description || !profile_pic || !userid ){
+       const {username,description,profile_pic,userid} = req.body
+
+
+       if(!username ||!files || !description || !profile_pic || !userid ){
 
         return res.status(404).json({message:"Please fill all the fileds"})
        }
 
-       
+
+       let post = []
+
+       for(let i=0;i<files.length;i++){
+ 
+         post.push(files[i].path)
+         
+       }
+          
        const data = postSchema.create({username,post,description,profile_pic,userid})
 
        res.status(201).json({message:"Post Uploaded Successfully"})
@@ -34,13 +46,13 @@ export const addPost = async function addPost(req,res){
 
 export const loadPosts = async function loadPosts(req,res){
 
-    console.log("Inside Load posts")
+    // console.log("Inside Load posts")
 
-    console.log(req.user)
+    // console.log(req.user)
 
     const userData = await userSchema.findOne({_id:req.user})
 
-   console.log(userData)
+  //  console.log(userData)
 
 
     try{
@@ -152,3 +164,37 @@ export const deleteProfile = async function deleteProfile(req, res) {
   
 
 
+  export async function handleUpload(req, res) {
+
+    try{
+
+      let files = req.files;
+
+      console.log(files)
+
+      let post = []
+
+      for(let i=0;i<files.length;i++){
+
+        post.push(files[i].path)
+        
+      }
+
+      console.log("THis is path",post)
+      
+      if(!files){
+        return res.status(404).json({message:"No File Found"})
+      }
+      
+      return res.status(200).json({message:"File Uploaded Successfully"})
+      
+    }
+
+    catch(error){
+
+      return res.status(500).json({message:"Internal Server Error"})
+    }
+    
+
+  }
+  
