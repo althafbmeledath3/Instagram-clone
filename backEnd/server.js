@@ -15,7 +15,9 @@ const file_name = url.fileURLToPath(import.meta.url)
 const __dirname = dirname(file_name)
 
 const frontEnd = join(__dirname,"..","frontEnd")
-const port = 4000
+
+
+const port = 4000 || process.env.port
 
 const app = express()
 
