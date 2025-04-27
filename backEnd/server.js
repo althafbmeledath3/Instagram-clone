@@ -41,6 +41,19 @@ app.use("/api",insta_routes)
 
 
 
+// Serve frontend static files (production only)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname,"..", 'frontEnd/build')));
+
+  // For any non-API request, serve the frontend's index.html
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "..",'frontEnd', 'index.html'));
+  });
+}
+
+
+
+
 //connect database then start the server
 connection().then(()=>{
     app.listen(port,()=>{
