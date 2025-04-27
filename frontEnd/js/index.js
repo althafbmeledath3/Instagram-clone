@@ -27,6 +27,11 @@ async function loadPosts() {
     const data = await response.json();
     // console.log('Fetched data:', data);
 
+    if(response.status===403){
+
+      window.location.href = "/login.html"
+    }
+
     if (response.status === 200) {
       // set the id on localstorage
       localStorage.setItem('id', data.userData._id);
