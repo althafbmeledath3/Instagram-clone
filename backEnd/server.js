@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(cors({
-  origin: ['http://localhost:4000', 'https://instagram-clone-frontend-456.onrender.com'], // Update with your actual frontend URL
+  origin: ['http://localhost:4000', 'https://instagram-clone-1-frontend1.onrender.com/'], // Update with your actual frontend URL
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
 }));
