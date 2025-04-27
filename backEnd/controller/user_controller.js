@@ -17,45 +17,82 @@ const transporter = nodemailer.createTransport({
 
 
 
-export const signUp = async function signUp(req,res){
+// export const signUp = async function signUp(req,res){
 
   
   
 
-    try{
+//     try{
 
-        const profile_pic = req.file.path
+//         const profile_pic = req.file.path
 
-        const {username, email, phone, password } = req.body;
+//         const {username, email, phone, password } = req.body;
         
         
-        if (!( profile_pic && username && email && phone && password)) {
-            return res.status(400).json({message:"Please Fill all the details"})
+//         if (!( profile_pic && username && email && phone && password)) {
+//             return res.status(400).json({message:"Please Fill all the details"})
             
-        }
+//         }
         
-        //hash the password
-        bcrypt.hash(password,10).then(async (hashed_pwd)=>{
+//         //hash the password
+//         bcrypt.hash(password,10).then(async (hashed_pwd)=>{
             
-            const data = await userSchema.create({
-                profile_pic,
-                username,
-                email,
-                phone,
-                password:hashed_pwd
-            })
+//             const data = await userSchema.create({
+//                 profile_pic,
+//                 username,
+//                 email,
+//                 phone,
+//                 password:hashed_pwd
+//             })
             
-            res.status(201).json({message:"User Created Successfully"})
-        })
+//             res.status(201).json({message:"User Created Successfully"})
+//         })
+//     }
+
+//     catch(err){
+//         console.log(err)
+//         res.status(400).json({message:"Error in creating user"})
+//     }
+
+
+// }
+
+
+
+
+export const signUp = async function signUp(req, res) {
+  try {
+    // Check if file was uploaded
+    if (!req.file) {
+      return res.status(400).json({ message: "Profile picture is required" });
     }
 
-    catch(err){
-        console.log(err)
-        res.status(400).json({message:"Error in creating user"})
+    const profile_pic = req.file.path;
+    const { username, email, phone, password } = req.body;
+
+    if (!(profile_pic && username && email && phone && password)) {
+      return res.status(400).json({ message: "Please fill all the details" });
     }
 
+    const hashed_pwd = await bcrypt.hash(password, 10);
 
-}
+    // Create the user in the database
+    const data = await userSchema.create({
+      profile_pic,
+      username,
+      email,
+      phone,
+      password: hashed_pwd,
+    });
+
+    res.status(201).json({ message: "User Created Successfully" });
+
+  } catch (err) {
+    console.error("Error in creating user:", err);
+    res.status(400).json({ message: "Error in creating user", error: err.message });
+  }
+};
+
 
 
 export const logIn = async function logIn(req, res) {
