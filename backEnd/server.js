@@ -10,12 +10,6 @@ import env from "dotenv"
 env.config()
 
 import cors from 'cors';
-// CORS configuration
-app.use(cors({
-    origin: 'https://instagram-clone-3-gp0a.onrender.com/',  // Replace with your actual frontend URL
-    methods: 'GET,POST,PUT,DELETE',  // Allowed methods
-    allowedHeaders: 'Content-Type,Authorization',  // Allowed headers
-  }));
 
 const file_name = url.fileURLToPath(import.meta.url)
 
@@ -27,6 +21,14 @@ const frontEnd = join(__dirname,"..","frontEnd")
 const port = 4000 || process.env.port
 
 const app = express()
+
+
+// CORS configuration
+app.use(cors({
+    origin: 'https://instagram-clone-3-gp0a.onrender.com/',  // Replace with your actual frontend URL
+    methods: 'GET,POST,PUT,DELETE',  // Allowed methods
+    allowedHeaders: 'Content-Type,Authorization',  // Allowed headers
+  }));
 
 
 app.use(express.json({limit:"50mb"}))
@@ -43,11 +45,11 @@ app.use("/api",insta_routes)
 
 // Serve frontend static files (production only)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname,"..", 'frontEnd/build')));
+  app.use(express.static(frontEnd));
 
   // For any non-API request, serve the frontend's index.html
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "..",'frontEnd', 'index.html'));
+    res.sendFile(path.join(frontEnd, 'index.html'));
   });
 }
 
