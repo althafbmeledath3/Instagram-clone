@@ -18,7 +18,7 @@ let profile_pic = document.getElementById('profile_pic');
 
 async function loadPosts() {
   try {
-    const response = await fetch("https://instagram-clone-1-backend.onrender.com/api/loadPosts", {
+    const response = await fetch("http://localhost:4000/api/loadPosts", {
       headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
     });
 
@@ -27,11 +27,7 @@ async function loadPosts() {
     const data = await response.json();
     // console.log('Fetched data:', data);
 
-    if(response.status===403){
-
-      window.location.href = "/login.html"
-    }
-
+    console.log(data.data[0].post[0])
     if (response.status === 200) {
       // set the id on localstorage
       localStorage.setItem('id', data.userData._id);

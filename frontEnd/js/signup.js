@@ -1,5 +1,5 @@
 
-const backend_url = "https://instagram-clone-1-backend.onrender.com/"
+// const backend_url = "https://instagram-clone-1-backend.onrender.com/"
 
 let profile_pic = ""
 document.getElementById('profile_pic').addEventListener('change',async(e)=>{
@@ -95,7 +95,7 @@ async function signUp(e){
 
     try{
 
-        const response = await fetch('https://instagram-clone-1-backend.onrender.com/api/signUp',{
+        const response = await fetch('/api/signUp',{
             method:"POST",
             body:formData
         })

@@ -3,101 +3,101 @@ import postSchema from "../models/post.model.js"
 import userSchema from "../models/user.model.js"
 
 
-import { v2 as cloudinary } from 'cloudinary';
+// import { v2 as cloudinary } from 'cloudinary';
 
-// export const addPost = async function addPost(req,res){
+export const addPost = async function addPost(req,res){
 
  
 
-//     try{
+    try{
 
-//        const files = req.files
+       const files = req.files
 
-//        const {username,description,profile_pic,userid} = req.body
-
-
-//        if(!username ||!files || !description || !profile_pic || !userid ){
-
-//         return res.status(404).json({message:"Please fill all the fileds"})
-//        }
+       const {username,description,profile_pic,userid} = req.body
 
 
-//        let post = []
+       if(!username ||!files || !description || !profile_pic || !userid ){
 
-//        for(let i=0;i<files.length;i++){
+        return res.status(404).json({message:"Please fill all the fileds"})
+       }
+
+
+       let post = []
+
+       for(let i=0;i<files.length;i++){
  
-//          post.push(files[i].path)
+         post.push(files[i].path)
          
-//        }
+       }
           
-//        const data = postSchema.create({username,post,description,profile_pic,userid})
+       const data = postSchema.create({username,post,description,profile_pic,userid})
 
-//        res.status(201).json({message:"Post Uploaded Successfully"})
+       res.status(201).json({message:"Post Uploaded Successfully"})
        
-//     }
+    }
 
-//     catch(err){
+    catch(err){
 
-//         console.log(err)
+        console.log(err)
 
-//         res.status(500).json({message:err})
-//     }
-// }
+        res.status(500).json({message:err})
+    }
+}
 
 
 // Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // 'instagram'
-  api_key: process.env.CLOUDINARY_API_KEY, // '614988553485296'
-  api_secret: process.env.CLOUDINARY_API_SECRET, // Your new secret
-});
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // 'instagram'
+//   api_key: process.env.CLOUDINARY_API_KEY, // '614988553485296'
+//   api_secret: process.env.CLOUDINARY_API_SECRET, // Your new secret
+// });
 
-export const addPost = async (req, res) => {
-  try {
-    const { username, description, profile_pic, userid } = req.body;
-    const files = req.files;
+// export const addPost = async (req, res) => {
+//   try {
+//     const { username, description, profile_pic, userid } = req.body;
+//     const files = req.files;
 
-    // Validate inputs
-    if (!username || !files || files.length === 0 || !description || !profile_pic || !userid) {
-      return res.status(400).json({ message: 'Please fill all fields and upload at least one image' });
-    }
+//     // Validate inputs
+//     if (!username || !files || files.length === 0 || !description || !profile_pic || !userid) {
+//       return res.status(400).json({ message: 'Please fill all fields and upload at least one image' });
+//     }
 
-    // Verify user exists
-    const user = await userSchema.findById(userid);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+//     // Verify user exists
+//     const user = await userSchema.findById(userid);
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
 
-    // Upload images to Cloudinary
-    const imageUrls = [];
-    for (const file of files) {
-      const result = await cloudinary.uploader.upload(
-        `data:${file.mimetype};base64,${file.buffer.toString('base64')}`,
-        {
-          folder: 'instagram_clone',
-          resource_type: 'image',
-          transformation: [{ width: 800, crop: 'scale', quality: 'auto' }],
-        }
-      );
-      imageUrls.push(result.secure_url);
-    }
+//     // Upload images to Cloudinary
+//     const imageUrls = [];
+//     for (const file of files) {
+//       const result = await cloudinary.uploader.upload(
+//         `data:${file.mimetype};base64,${file.buffer.toString('base64')}`,
+//         {
+//           folder: 'instagram_clone',
+//           resource_type: 'image',
+//           transformation: [{ width: 800, crop: 'scale', quality: 'auto' }],
+//         }
+//       );
+//       imageUrls.push(result.secure_url);
+//     }
 
-    // Create post in database
-    const post = await postSchema.create({
-      username,
-      post: imageUrls,
-      description,
-      profile_pic,
-      userid,
-      likes: [],
-    });
+//     // Create post in database
+//     const post = await postSchema.create({
+//       username,
+//       post: imageUrls,
+//       description,
+//       profile_pic,
+//       userid,
+//       likes: [],
+//     });
 
-    res.status(201).json({ message: 'Post uploaded successfully' });
-  } catch (err) {
-    console.error('Error in addPost:', err);
-    res.status(500).json({ message: 'Failed to upload post' });
-  }
-};
+//     res.status(201).json({ message: 'Post uploaded successfully' });
+//   } catch (err) {
+//     console.error('Error in addPost:', err);
+//     res.status(500).json({ message: 'Failed to upload post' });
+//   }
+// };
 
 
 
