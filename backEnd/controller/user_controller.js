@@ -88,7 +88,7 @@ export const signUp = async function signUp(req, res) {
     res.status(201).json({ message: "User Created Successfully" });
 
   } catch (err) {
-    console.error("Error in creating user:", err);
+    // console.error("Error in creating user:", err);
     res.status(400).json({ message: "Error in creating user", error: err.message });
   }
 };
@@ -121,7 +121,7 @@ export const logIn = async function logIn(req, res) {
       res.status(200).json({ message: "Logged in success" ,token});
   
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.status(400).json({ error: err });
     }
   };
@@ -151,7 +151,7 @@ export const getUser = async function getUser(req,res) {
 
   catch(err){
 
-    console.log(err)
+    // console.log(err)
     res.status(500).json({messgae:err})
   }
 
@@ -183,7 +183,7 @@ export const getUsers = async function getUsers(req,res) {
 
   catch(err){
 
-    console.log(err)
+    // console.log(err)
     res.status(500).json({messgae:err})
   }
 
@@ -215,7 +215,7 @@ export const editUser = async function editUser(req, res) {
   } 
   
   catch (err) {
-    console.error(err);
+    // console.error(err);
     res.status(500).json({ message: err.message || "Internal server error" }); 
   }
 };
@@ -245,7 +245,7 @@ export async function sendOTP(req,res){
     
     user.otp = otp
 
-    console.log(user.otp)
+    // console.log(user.otp)
 
     await user.save();
     
@@ -257,7 +257,7 @@ export async function sendOTP(req,res){
       html: `<b>Hello ${user.username} your otp is ${otp}</b>`, // html body
     });
     
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
     
     res.status(200).json({message:"OTP send successfully"})
     
@@ -265,7 +265,7 @@ export async function sendOTP(req,res){
 
   catch(err){
 
-    console.log(err)
+    // console.log(err)
     res.status(500).json({message:err})
   }
 
@@ -303,7 +303,7 @@ export async function verify_otp(req,res){
 
   catch(err){
 
-    console.log(err)
+    // console.log(err)
     res.status(500).json({message:err})
   }
 
@@ -346,7 +346,7 @@ export async function pass_reset(req,res){
 
   catch(err){
 
-    console.log(err)
+    // console.log(err)
     res.status(500).json({message:err})
   }
 
@@ -382,7 +382,7 @@ export async function delete_otp(req,res){
 
   catch(err){
 
-    console.log(err)
+    // console.log(err)
     res.status(500).json({message:err})
   }
 
@@ -394,15 +394,3 @@ export async function delete_otp(req,res){
 
 
 
-
-function addnum(a,b){
-
-
-  console.log(a+b)
-
-
-}
-
-
-
-addnum(3,4)

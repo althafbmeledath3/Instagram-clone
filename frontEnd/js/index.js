@@ -22,7 +22,10 @@ async function loadPosts() {
       headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
     });
 
-   
+   if(response.status===403){
+     alert("No token")
+     window.location.href="/login.html"
+   }
    
     const data = await response.json();
     // console.log('Fetched data:', data);

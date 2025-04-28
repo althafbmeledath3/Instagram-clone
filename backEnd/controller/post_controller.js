@@ -135,7 +135,7 @@ export const getPost = async function getPost(req,res){
         
         let userid = req.params.id
         
-        console.log("userd",userid)
+        // console.log("userd",userid)
         
         const userData = await postSchema.find({userid})
 
@@ -146,7 +146,7 @@ export const getPost = async function getPost(req,res){
     catch(err){
 
 
-        console.log(err)
+        // console.log(err)
         res.status(500).json({message:err})
     }
    
@@ -175,7 +175,7 @@ export const deleteProfile = async function deleteProfile(req, res) {
 
 
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       res.status(500).json({ message: err.message || "Internal server error" });
     }
   };
@@ -191,7 +191,7 @@ export const deleteProfile = async function deleteProfile(req, res) {
       const post = await postSchema.findById(postId);
 
 
-      console.log(post.likes)
+      // console.log(post.likes)
   
       if (!post) {
         return res.status(404).json({ message: "Post not found" });
@@ -214,7 +214,7 @@ export const deleteProfile = async function deleteProfile(req, res) {
       });
   
     } catch (error) {
-      console.error("Error liking post:", error);
+      // console.error("Error liking post:", error);
       return res.status(500).json({ message: "Internal Server Error" });
     }
   }
@@ -227,7 +227,7 @@ export const deleteProfile = async function deleteProfile(req, res) {
 
       let files = req.files;
 
-      console.log(files)
+      // console.log(files)
 
       let post = []
 
@@ -237,7 +237,7 @@ export const deleteProfile = async function deleteProfile(req, res) {
         
       }
 
-      console.log("THis is path",post)
+      // console.log("THis is path",post)
       
       if(!files){
         return res.status(404).json({message:"No File Found"})

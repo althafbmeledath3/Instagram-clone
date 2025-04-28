@@ -14,12 +14,3 @@ export default async function connection(){
 
 
 
-//export
-// export default async function connection(){
-
-//     //create database
-//     const db = await mongoose.connect(process.env.DB_URI,{dbName:"Instagram"})
-//     console.log("DataBase connected")
-    
-//     return db
-// }
